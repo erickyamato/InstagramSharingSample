@@ -25,11 +25,19 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         applyText()
+        applyImage()
     }
     
     // MARK: - Private Functions
     private func applyText() {
         shareButton.setTitle(Constants.kShareButtonTitle, for: .normal)
+    }
+    
+    private func applyImage() {
+        guard let shareImage = UIImage(systemName: "square.and.arrow.up") else { return }
+        
+        shareButton.setImage(shareImage, for: .normal)
+        shareButton.semanticContentAttribute = .forceRightToLeft
     }
 
     // MARK: - Actions
