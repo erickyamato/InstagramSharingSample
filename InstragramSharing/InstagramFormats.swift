@@ -29,7 +29,7 @@ class InstagramFormats: NSObject {
     // MARK: - Public Functions
     func postImageToStories(backgroundImage: UIImage,
                             stickerImage: UIImage? = nil,
-                            conntentURL: String? = nil) -> Bool {
+                            conntentURL: String? = nil) {
         var items:  [[String: Any]] = [[:]]
         
         if let backgroundImageData = backgroundImage.pngData() {
@@ -46,24 +46,22 @@ class InstagramFormats: NSObject {
             items[0].updateValue(conntentURL as Any, forKey: optionnKey.contentUrl.rawValue)
         }
         
-        let isPosted = post(items)
-        
-        return isPosted
+        post(items)
     }
     
     func postVideoToStories(backgroundVideoURL: URL,
                             stickerImage: UIImage? = nil,
-                            contentURL: String? = nil) -> Bool {
+                            contentURL: String? = nil) {
         var items: [[String: Any]] = [[:]]
         
         var backgroundVideoData: Data?
         do {
             try backgroundVideoData = Data(contentsOf: backgroundVideoURL)
         } catch {
-            return false
+            return
         }
         
-        guard let backgroundVideoData = backgroundVideoData else { return false }
+        guard let backgroundVideoData = backgroundVideoData else { return }
 
         
         items[0].updateValue(backgroundVideoData as Data, forKey: optionnKey.backgroundVideo.rawValue)
@@ -78,15 +76,13 @@ class InstagramFormats: NSObject {
             items[0].updateValue(contentURL as Any, forKey: optionnKey.contentUrl.rawValue)
         }
         
-        let isPosted = post(items)
-        
-        return isPosted
+        post(items)
     }
     
     func postStickerToStories(stickerImage: UIImage,
                               backgroundTopColor: String = "#000000",
                               backgroundBottomColor: String = "#000000",
-                              contentURL: String? = nil) -> Bool {
+                              contentURL: String? = nil) {
         var items: [[String: Any]] = [[:]]
         
         if let stickerImageData = stickerImage.pngData() {
@@ -99,23 +95,18 @@ class InstagramFormats: NSObject {
             items[0].updateValue(contentURL as Any, forKey: optionnKey.contentUrl.rawValue)
         }
         
-        let isPosted = post(items)
-        
-        return isPosted
+        post(items)
     }
     
     // MARK: - Private Function
-    private func post(_ items: [[String: Any]]) -> Bool {
+    private func post(_ items: [[String: Any]]) {
         
-        guard let urlScheme = URL(string:Constants.kURLScheme) else { return false }
+        guard let urlScheme = URL(string:Constants.kURLScheme) else { return }
         
-        guard UIApplication.shared.canOpenURL(urlScheme) else {
-            return false
-        }
+        guard UIApplication.shared.canOpenURL(urlScheme) else { return }
             
         let options: [UIPasteboard.OptionsKey: Any] = [.expirationDate: Date().addingTimeInterval(60 * 5)]
         UIPasteboard.general.setItems(items, options: options)
         UIApplication.shared.open(urlScheme)
-        return true
     }
 }
