@@ -24,16 +24,16 @@ class ViewController: UIViewController {
     // MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        applyText()
-        applyImage()
+        setupText()
+        setupImage()
     }
     
     // MARK: - Private Functions
-    private func applyText() {
+    private func setupText() {
         shareButton.setTitle(Constants.kShareButtonTitle, for: .normal)
     }
     
-    private func applyImage() {
+    private func setupImage() {
         guard let shareImage = UIImage(systemName: "square.and.arrow.up") else { return }
         
         shareButton.setImage(shareImage, for: .normal)
@@ -44,8 +44,5 @@ class ViewController: UIViewController {
     @IBAction func didTapShareButton(_ sender: Any) {
         instagramFormats.postImageToStories(backgroundImage: UIImage(systemName: "gear")!)
     }
-    
-    
-    
-}
 
+}
