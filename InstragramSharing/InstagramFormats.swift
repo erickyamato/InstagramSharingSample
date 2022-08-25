@@ -80,8 +80,8 @@ class InstagramFormats: NSObject {
     }
     
     func postStickerToStories(stickerImage: UIImage,
-                              backgroundTopColor: String = "#FFFFFF",
-                              backgroundBottomColor: String = "#000000",
+                              backgroundTopColor: String = "#FB0234",
+                              backgroundBottomColor: String = "#FF9101",
                               contentURL: String? = nil) {
         var items: [[String: Any]] = [[:]]
         
