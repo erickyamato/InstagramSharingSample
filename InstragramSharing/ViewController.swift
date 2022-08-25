@@ -42,7 +42,7 @@ class ViewController: UIViewController {
 
     // MARK: - Actions
     @IBAction func didTapShareButton(_ sender: Any) {
-        instagramFormats.postImageToStories(backgroundImage: UIImage(systemName: "gear")!)
+        instagramFormats.postStickerToStories(stickerImage: UIImage(named: "Memoji")!)
     }
 
 }
