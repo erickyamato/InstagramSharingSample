@@ -29,7 +29,7 @@ class InstagramFormats: NSObject {
     // MARK: - Public Functions
     func postImageToStories(backgroundImage: UIImage,
                             stickerImage: UIImage? = nil,
-                            conntentURL: String? = nil) {
+                            contentURL: String? = nil) {
         var items:  [[String: Any]] = [[:]]
         
         if let backgroundImageData = backgroundImage.pngData() {
@@ -42,8 +42,8 @@ class InstagramFormats: NSObject {
             }
         }
         
-        if conntentURL != nil {
-            items[0].updateValue(conntentURL as Any, forKey: optionnKey.contentUrl.rawValue)
+        if contentURL != nil {
+            items[0].updateValue(contentURL as Any, forKey: optionnKey.contentUrl.rawValue)
         }
         
         post(items)
